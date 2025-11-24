@@ -1,0 +1,178 @@
+# 2D-Flox - Competitive 2-Player Ship Duel Game
+
+A fast-paced keyboard-only two-player dueling game with 8 unique ships, split-screen and WiFi/LAN multiplayer, ported from the Android game DUAL!
+
+## Features
+
+- **8 Unique Ships:** Zaba, Rekin, Osa, Komar, Kombuz, Gwiazdka, Rift, Nexus  each with special abilities
+- **Keyboard-Only Controls:** No touch input; pure keyboard gameplay
+- **Same-Computer Split-Screen:** Player 1 (WASD) vs Player 2 (Arrow Keys)
+- **WiFi/LAN Multiplayer:** Host and join over local network with smooth client-side interpolation and reconnect/backoff
+- **Rich Visual Effects:** APK-sourced sprites (optional), particle effects, ship damage feedback
+- **Configurable Per-Ship:** Tunable stats, sound effects, visual tweaks for each ship type
+
+## Quick Start
+
+### Requirements
+- Python 3.7+ 
+- Pygame 2.0+
+
+### Install
+\\\ash
+pip install -r requirements.txt
+python project_buzzkill.py
+\\\
+
+### Run from Source
+\\\ash
+python project_buzzkill.py
+\\\
+
+### Run from Built Executable (Windows)
+Download the release ZIP and run \2D-Flox.exe\.
+
+## Controls
+
+| Player | Up | Down | Left | Right | Shoot |
+|--------|----|----|------|-------|-------|
+| P1 | W | S | A | D | Space |
+| P2 |  |  |  |  | Enter |
+
+**Tap** to fire single bullet. **Hold** to charge special attack.
+
+## Game Modes
+
+### Split-Screen (Same Computer)
+1. Run the game
+2. Click "START GAME" (or press Enter from menu)
+3. Both players play on the same screen
+
+### WiFi Multiplayer
+1. **Host:** Click "Host (WiFi)" on the menu
+2. **Client:** Enter host IP in "Join (IP)" field and click "Join"
+3. Play over LAN with automatic reconnection/backoff
+
+## Game Mechanics
+
+- Ships cannot cross the center line; bullets can
+- Health decreases when hit; ships dim as damage accumulates
+- First player to destroy opponent wins
+- Each ship has unique attack patterns and charge behaviors
+
+## Ship Abilities
+
+- **Zaba** (Square): Charged block attack
+- **Rekin** (Triangle): Fast triple-shot
+- **Osa** (Circle): Rapid-fire spread
+- **Komar** (Kite): Laser beam with full-screen coverage
+- **Kombuz** (Hexagon): Mine-layer with distance-based explosion
+- **Gwiazdka** (Star): Scatter shot and nova burst
+- **Rift** (Boomerang): Returning projectiles with sweep attack
+- **Nexus** (Cross): Cross-pattern special attack
+
+## Networking
+
+- **Host-Authoritative:** Server maintains game state; clients send input and render interpolated snapshots
+- **Reconnection:** Automatic exponential backoff (18 seconds) on connection loss
+- **Client Interpolation:** Smooth position transitions for remote ships (22% alpha per frame)
+- **Keyboard Input Only:** No latency from UI interactions
+
+## Building a Distributable
+
+### Windows Executable
+\\\powershell
+cd 2D-Flox
+python -m PyInstaller --onefile --name "2D-Flox" project_buzzkill.py
+\\\
+
+The built exe will be in \dist/2D-Flox.exe\.
+
+## File Structure
+
+\\\
+project_buzzkill.py        # Main game (canonical source)
+2D-Flox/
+   project_buzzkill.py  # Entry copy
+   2D-Flox.py           # Simple runner
+   dist/
+      2D-Flox.exe      # Built Windows executable
+   sync_assets.ps1      # Copy APK assets helper
+   prepare_release.ps1  # Bundle release folder
+\\\
+
+## Audio & Visual Assets
+
+Optional APK-extracted assets are available in \dual/assets/\ (not included in the main release to respect IP). To use them:
+
+1. Extract APK assets into \dual/assets/\
+2. Run \sync_assets.ps1\ to copy into \2D-Flox/assets/\
+3. Game will auto-prefer APK sprites/sounds if available
+
+## Settings
+
+Press the gear icon () in the menu to:
+- Adjust music and SFX volume
+- Remap player keys (Player 1 and Player 2)
+- Reset to defaults
+
+## Credits
+
+- **Author:** Voltsparx (Niyor Kalita)
+- **Email:** voltsparx@gmail.com
+- **Based on:** DUAL! by Seabaa
+
+## Dedication
+
+Dedicated to the Voltros Community  
+Especially dedicated to the person named Lovely Thakuria.
+
+## License
+
+See LICENSE.txt in the distribution.
+
+## Version
+
+v0.9 (Nov 25, 2025)
+
+## Troubleshooting
+
+**Game won't start:**
+- Ensure Pygame is installed: \pip install pygame\
+- Check Python version is 3.7+
+
+**WiFi multiplayer not connecting:**
+- Ensure both machines are on the same local network
+- Check firewall isn't blocking port 50007
+- If connection drops, client will auto-reconnect (check menu for "connected" status)
+
+**Ship/bullet sprites not showing:**
+- Game falls back to vector shapes; no issue
+- To use APK sprites, extract and run \sync_assets.ps1\
+"@ | Set-Content ".\2D-Flox-source-updated\README.md"; @"
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+2D-Flox v0.9
+Author: Voltsparx (Niyor Kalita)
+Based on DUAL! by Seabaa
+
+Dedicated to the Voltros Community
+Especially dedicated to the person named Lovely Thakuria.
